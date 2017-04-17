@@ -3,6 +3,8 @@
 #ifndef ULTI_LIBULTI_PLAYER_H
 #define ULTI_LIBULTI_PLAYER_H
 
+#include <libulti/macros.h>
+
 namespace ulti {
 
 class Engine;
@@ -12,6 +14,8 @@ public:
   Player(Engine* engine);
 
 private:
+  DISALLOW_COPY_AND_ASSIGN(Player);
+
   Engine* engine_;
 };
 

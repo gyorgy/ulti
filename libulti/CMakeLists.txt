@@ -4,6 +4,6 @@ project(libulti)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES engine.h engine.cc player.h player.cc)
+set(SOURCE_FILES engine.h engine.cc player.h player.cc macros.h)
 
 add_library(ulti STATIC ${SOURCE_FILES})

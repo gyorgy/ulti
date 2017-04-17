@@ -4,6 +4,7 @@
 #define ULTI_LIBKUBLER_KUBLER_H
 
 #include <libulti/engine.h>
+#include <libulti/macros.h>
 
 namespace ulti {
 namespace kubler {
@@ -14,6 +15,7 @@ public:
   virtual ~Kubler();
 
 private:
+  DISALLOW_COPY_AND_ASSIGN(Kubler);
 };
 
 }  // namespace kubler

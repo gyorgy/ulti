@@ -3,6 +3,7 @@
 #ifndef ULTI_TESTBED_TESTBED_H
 #define ULTI_TESTBED_TESTBED_H
 
+#include <libulti/macros.h>
 #include <libulti/player.h>
 
 namespace ulti {
@@ -15,6 +16,7 @@ public:
   int RunOnce();
 
 private:
+  DISALLOW_COPY_AND_ASSIGN(Testbed);
 };
 
 }  // namespace testbed

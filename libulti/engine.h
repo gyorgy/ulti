@@ -3,6 +3,8 @@
 #ifndef ULTI_LIBULTI_ENGINE_H
 #define ULTI_LIBULTI_ENGINE_H
 
+#include <libulti/macros.h>
+
 namespace ulti {
 
 class Engine {
@@ -11,6 +13,7 @@ public:
   virtual ~Engine();
 
 private:
+  DISALLOW_COPY_AND_ASSIGN(Engine);
 };
 
 }  // namespace ulti
