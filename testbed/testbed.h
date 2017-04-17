@@ -17,6 +17,14 @@ public:
 
 private:
   DISALLOW_COPY_AND_ASSIGN(Testbed);
+
+  Player* players_[3];
+
+  void StartGame();
+  void Deal();
+  void RunAuction();
+  void RunGame();
+  void FinishGame();
 };
 
 }  // namespace testbed
