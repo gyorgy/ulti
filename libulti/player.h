@@ -3,8 +3,9 @@
 #ifndef ULTI_LIBULTI_PLAYER_H
 #define ULTI_LIBULTI_PLAYER_H
 
-#include <libulti/macros.h>
+#include <libulti/bids.h>
 #include <libulti/cards.h>
+#include <libulti/macros.h>
 
 namespace ulti {
 
@@ -18,6 +19,9 @@ public:
 
   void StartGame(int self_id);
   void Deal(const Cards& cards);
+  bool WouldBid();
+  void GetBidAndTalon(Bids* bids, Cards* cards);
+  void NotifyBid(int bidding_player, const Bids& bid);
 
 private:
   Engine* engine_;

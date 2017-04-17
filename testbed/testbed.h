@@ -3,8 +3,10 @@
 #ifndef ULTI_TESTBED_TESTBED_H
 #define ULTI_TESTBED_TESTBED_H
 
+#include <libulti/cards.h>
 #include <libulti/macros.h>
 #include <libulti/player.h>
+#include <libulti/bids.h>
 
 namespace ulti {
 namespace testbed {
@@ -16,15 +18,18 @@ public:
   int RunOnce();
 
 private:
-  DISALLOW_COPY_AND_ASSIGN(Testbed);
-
   Player* players_[3];
+  Cards talon_;
+  Bids bid_;
+  int bidding_player_;
 
   void StartGame();
   void Deal();
   void RunAuction();
   void RunGame();
   void FinishGame();
+
+  DISALLOW_COPY_AND_ASSIGN(Testbed);
 };
 
 }  // namespace testbed

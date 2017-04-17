@@ -22,4 +22,17 @@ void Player::Deal(const Cards& cards) {
   // TODO(gyorgy): Implement it.
 }
 
+bool Player::WouldBid() {
+  // TODO(gyorgy): Implement it.
+  return false;
+}
+
+void Player::GetBidAndTalon(Bids* bids, Cards* cards) {
+  // TODO(gyorgy): Implement it.
+}
+
+void Player::NotifyBid(int bidding_player, const Bids& bid) {
+  // TODO(gyorgy): Implement it.
+}
+
 }  // namespace ulti

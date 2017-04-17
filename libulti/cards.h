@@ -5,6 +5,8 @@
 
 #include <cstdint>
 
+#include "bits.h"
+
 namespace ulti {
 
 typedef uint_fast32_t Card;
@@ -31,6 +33,9 @@ public:
 
   Cards() : cards_(0UL) {}
   Cards(Card cards) : cards_(cards) {}
+
+  int Count() const { return PopCount(cards_); }
+  void Clear() { cards_ = 0UL; }
 
   void Add(const Cards& cards) { cards_ |= cards.cards_; }
 
