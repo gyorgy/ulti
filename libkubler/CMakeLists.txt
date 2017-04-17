@@ -4,7 +4,10 @@ project(libkubler)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES kubler.h kubler.cc)
+set(SOURCE_FILES
+        kubler.h
+        kubler.cc
+        )
 
 add_library(kubler STATIC ${SOURCE_FILES})
 
