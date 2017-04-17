@@ -6,3 +6,5 @@ set(CMAKE_CXX_STANDARD 11)
 set(SOURCE_FILES main.cc testbed.h testbed.cc)
 
 add_executable(testbed ${SOURCE_FILES})
+
+target_link_libraries(testbed ulti kubler)
