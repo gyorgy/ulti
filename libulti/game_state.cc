@@ -23,4 +23,19 @@ void GameState::Reset(int self_id) {
   }
 }
 
+void GameState::Deal(const Cards& cards) {
+  players_[self_id_]->Deal(cards);
+}
+
+void GameState::RemoveFromHand(const Cards& cards) {
+  players_[self_id_]->RemoveFromHand(cards);
+}
+
+void GameState::SetBidAndTalon(int bidding_player, const Bids& bid, const Cards& talon) {
+  bidding_player_ = bidding_player;
+  bid_ = bid;
+  talon_ = talon;
+  players_[bidding_player]->RemoveFromHand(talon);
+}
+
 }  // namespace ulti

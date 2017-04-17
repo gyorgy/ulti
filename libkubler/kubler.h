@@ -14,6 +14,10 @@ public:
   Kubler();
   virtual ~Kubler();
 
+  virtual void Start();
+  virtual bool WouldBid(const GameState& state);
+  virtual void GetBidAndTalon(const GameState& state, Bids* bid, Cards* talon);
+
 private:
   DISALLOW_COPY_AND_ASSIGN(Kubler);
 };

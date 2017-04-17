@@ -6,6 +6,16 @@ namespace ulti {
 
 PlayerState::PlayerState() {}
 
-void PlayerState::Reset() {}
+void PlayerState::Reset() {
+  hand_.Clear();
+}
+
+void PlayerState::Deal(const Cards& cards) {
+  hand_.Add(cards);
+}
+
+void PlayerState::RemoveFromHand(const Cards& cards) {
+  hand_.Remove(cards);
+}
 
 }  // namespace ulti

@@ -7,10 +7,18 @@
 
 namespace ulti {
 
+class Bids;
+class Cards;
+class GameState;
+
 class Engine {
 public:
   Engine();
   virtual ~Engine();
+
+  virtual void Start() = 0;
+  virtual bool WouldBid(const GameState& state) = 0;
+  virtual void GetBidAndTalon(const GameState& state, Bids* bid, Cards* talon) = 0;
 
 private:
   DISALLOW_COPY_AND_ASSIGN(Engine);

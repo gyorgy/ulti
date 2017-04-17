@@ -3,6 +3,7 @@
 #include <libulti/player.h>
 
 #include <libulti/game_state.h>
+#include <libulti/engine.h>
 
 namespace ulti {
 
@@ -16,23 +17,28 @@ Player::~Player() {
 
 void Player::StartGame(int self_id) {
   state_->Reset(self_id);
+  engine_->Start();
 }
 
 void Player::Deal(const Cards& cards) {
-  // TODO(gyorgy): Implement it.
+  state_->Deal(cards);
 }
 
 bool Player::WouldBid() {
-  // TODO(gyorgy): Implement it.
-  return false;
+  return engine_->WouldBid(*state_);
 }
 
-void Player::GetBidAndTalon(Bids* bids, Cards* cards) {
-  // TODO(gyorgy): Implement it.
+void Player::GetBidAndTalon(Bids* bid, Cards* talon) {
+  Bids new_bid;
+  Cards new_talon;
+  engine_->GetBidAndTalon(*state_, &new_bid, &new_talon);
+  state_->SetBidAndTalon(state_->GetSelfId(), new_bid, new_talon);
+  *bid = new_bid;
+  *talon = new_talon;
 }
 
 void Player::NotifyBid(int bidding_player, const Bids& bid) {
-  // TODO(gyorgy): Implement it.
+  state_->SetBidAndTalon(bidding_player, bid, Cards(0UL));
 }
 
 }  // namespace ulti

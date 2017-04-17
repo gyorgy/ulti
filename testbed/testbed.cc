@@ -146,6 +146,7 @@ void Testbed::RunAuction() {
     current_player = (current_player + 1) % 3;
   }
   std::cout << "auction done." << std::endl;
+  std::cout << bidding_player_ << " plays " << BidToString(bid_) << std::endl;
 }
 
 void Testbed::RunGame() {

@@ -35,9 +35,11 @@ public:
   Cards(Card cards) : cards_(cards) {}
 
   int Count() const { return PopCount(cards_); }
-  void Clear() { cards_ = 0UL; }
+  Cards GetRandomCard() const;
 
+  void Clear() { cards_ = 0UL; }
   void Add(const Cards& cards) { cards_ |= cards.cards_; }
+  void Remove(const Cards& cards) { cards_ &= ~cards.cards_; }
 
 private:
   Card cards_;
