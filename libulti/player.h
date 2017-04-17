@@ -3,6 +3,8 @@
 #ifndef ULTI_LIBULTI_PLAYER_H
 #define ULTI_LIBULTI_PLAYER_H
 
+#include <vector>
+
 #include <libulti/bids.h>
 #include <libulti/cards.h>
 #include <libulti/macros.h>
@@ -22,6 +24,11 @@ public:
   bool WouldBid();
   void GetBidAndTalon(Bids* bids, Cards* cards);
   void NotifyBid(int bidding_player, const Bids& bid);
+  Cards::Suit GetTrump();
+  void StartPlay(int bidding_player, const Bids& bid, Cards::Suit trump);
+  Cards GetCall(int calling_player, const std::vector<Cards>& calls);
+  void NotifyCall(int current_player, const Cards& call);
+  void NotifyTrick(int taking_player, const std::vector<Cards>& calls);
 
 private:
   Engine* engine_;

@@ -15,6 +15,10 @@ set(SOURCE_FILES
         player_state.h
         player_state.cc
         cards.h
-        bits.h bids.h cards.cc)
+        bits.h
+        bids.h
+        cards.cc
+        rules.h
+        rules.cc)
 
 add_library(ulti STATIC ${SOURCE_FILES})

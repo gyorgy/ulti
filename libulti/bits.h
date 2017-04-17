@@ -9,6 +9,8 @@ namespace ulti {
 
 inline int PopCount(uint_fast32_t bits) { return __builtin_popcountl(bits); }
 
+inline int CountTrailingZeros(uint_fast32_t bits) { return __builtin_ctzl(bits); }
+
 }  // namespace ulti
 
 #endif // ULTI_LIBULTI_BITS_H

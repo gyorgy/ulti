@@ -28,5 +28,15 @@ void Kubler::GetBidAndTalon(const GameState& state, Bids* bid, Cards* talon) {
   *talon = new_talon;
 }
 
+Cards::Suit Kubler::GetTrump() {
+  // TODO(gyorgy): Implement it.
+  return Cards::ACCORNS;
+}
+
+Cards Kubler::GetCall(const GameState& state, int calling_player, const std::vector<Cards>& calls) {
+  // TODO(gyorgy): Implement it.
+  return(state.GetHand().GetRandomCard());
+}
+
 }  // namespace kubler
 }  // namespace ulti

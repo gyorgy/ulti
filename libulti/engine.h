@@ -3,12 +3,14 @@
 #ifndef ULTI_LIBULTI_ENGINE_H
 #define ULTI_LIBULTI_ENGINE_H
 
+#include <vector>
+
 #include <libulti/macros.h>
+#include <libulti/cards.h>
 
 namespace ulti {
 
 class Bids;
-class Cards;
 class GameState;
 
 class Engine {
@@ -19,7 +21,9 @@ public:
   virtual void Start() = 0;
   virtual bool WouldBid(const GameState& state) = 0;
   virtual void GetBidAndTalon(const GameState& state, Bids* bid, Cards* talon) = 0;
-
+  virtual Cards::Suit GetTrump() = 0;
+  virtual Cards GetCall(const GameState& state, int calling_player,
+                        const std::vector<Cards>& calls) = 0;
 private:
   DISALLOW_COPY_AND_ASSIGN(Engine);
 };

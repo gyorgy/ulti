@@ -34,8 +34,12 @@ public:
   Cards() : cards_(0UL) {}
   Cards(Card cards) : cards_(cards) {}
 
+  Cards::Suit GetSuit() const { return static_cast<Suit>(CountTrailingZeros(cards_) / 8 * 8); }
+  int GetRank() const { return cards_ >> GetSuit() & 0xff; }
   int Count() const { return PopCount(cards_); }
   Cards GetRandomCard() const;
+  bool IsTaking(const Cards& other) const { return cards_ > other.cards_; }
+  bool IsTrumplesTaking(const Cards& other) const;
 
   void Clear() { cards_ = 0UL; }
   void Add(const Cards& cards) { cards_ |= cards.cards_; }

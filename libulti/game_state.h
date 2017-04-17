@@ -22,6 +22,7 @@ public:
   void Deal(const Cards& cards);
   void RemoveFromHand(const Cards& cards);
   void SetBidAndTalon(int bidding_player, const Bids& bid, const Cards& talon);
+  void SetTrump(Cards::Suit trump);
 
 private:
   PlayerState* players_[3];
@@ -29,6 +30,7 @@ private:
   int bidding_player_;
   Bids bid_;
   Cards talon_;
+  Cards::Suit trump_;
 
   DISALLOW_COPY_AND_ASSIGN(GameState);
 };

@@ -41,4 +41,27 @@ void Player::NotifyBid(int bidding_player, const Bids& bid) {
   state_->SetBidAndTalon(bidding_player, bid, Cards(0UL));
 }
 
+Cards::Suit Player::GetTrump() {
+  return engine_->GetTrump();
+}
+
+void Player::StartPlay(int bidding_player, const Bids& bid, Cards::Suit trump) {
+  state_->SetBidAndTalon(bidding_player, bid, Cards(0UL));
+  state_->SetTrump(trump);
+}
+
+Cards Player::GetCall(int calling_player, const std::vector<Cards>& calls) {
+  Cards call(engine_->GetCall(*state_, calling_player, calls));
+  state_->RemoveFromHand(call);
+  return call;
+}
+
+void Player::NotifyCall(int current_player, const Cards& call) {
+  // TODO(gyorgy): Implement it.
+}
+
+void Player::NotifyTrick(int taking_player, const std::vector<Cards>& calls) {
+  // TODO(gyorgy): Implement it.
+}
+
 }  // namespace ulti

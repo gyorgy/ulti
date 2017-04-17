@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include <libulti/cards.h>
+#include <libulti/rules.h>
 
 namespace ulti {
 namespace testbed {
@@ -81,6 +82,32 @@ static std::string BidToString(const Bids& bids) {
   return result;
 }
 
+static std::string SuitToString(Cards::Suit suit) {
+  switch (suit) {
+    case Cards::ACCORNS: return "acorns ";
+    case Cards::LEAVES: return "leaves ";
+    case Cards::HEARTS: return "hearts ";
+    case Cards::BALLS: return "balls ";
+    default: return "";
+  }
+}
+
+static std::string CardToString(const Cards& card) {
+  std::string result;
+  result.assign(SuitToString(card.GetSuit()));
+  switch (card.GetRank()) {
+    case Cards::VII: result.append("VII"); break;
+    case Cards::VIII: result.append("VIII"); break;
+    case Cards::IX: result.append("IX"); break;
+    case Cards::X: result.append("X"); break;
+    case Cards::UNDER: result.append("under"); break;
+    case Cards::OVER: result.append("over"); break;
+    case Cards::KING: result.append("king"); break;
+    case Cards::ACE: result.append("ace"); break;
+  }
+  return result;
+}
+
 Testbed::Testbed(Player* player_1, Player* player_2, Player* player_3)
   : players_{player_1, player_2, player_3} {}
 
@@ -146,12 +173,40 @@ void Testbed::RunAuction() {
     current_player = (current_player + 1) % 3;
   }
   std::cout << "auction done." << std::endl;
-  std::cout << bidding_player_ << " plays " << BidToString(bid_) << std::endl;
 }
 
 void Testbed::RunGame() {
   std::cout << "running game..." << std::endl;
-  // TODO(gyorgy): Implement it.
+  const Cards::Suit trump = HasTrump(bid_) ?
+                            players_[bidding_player_]->GetTrump() : Cards::TRUMPLESS;
+  for (auto player : players_) {
+    player->StartPlay(bidding_player_, bid_, trump);
+  }
+  std::cout << bidding_player_ << " plays " << BidToString(bid_);
+  if (trump != Cards::TRUMPLESS) {
+    std::cout << "trump is " << SuitToString(trump);
+  }
+  std::cout << std::endl;
+  int calling_player = bidding_player_;
+  for (int round = 0; round < 10; ++round) {
+    int current_player = calling_player;
+    std::vector<Cards> calls;
+    for (int i = 0 ; i < 3; ++i) {
+      Cards call = players_[current_player]->GetCall(calling_player, calls);
+      calls.push_back(call);
+      for (auto player : players_) {
+        player->NotifyCall(current_player, call);
+      }
+      std::cout << current_player << " calls " << CardToString(call) << std::endl;
+      current_player = (current_player + 1) % 3;
+    }
+    const int taking_player = GetTaker(bid_, trump, calling_player, calls);
+    for (auto player : players_) {
+      player->NotifyTrick(taking_player, calls);
+    }
+    std::cout << taking_player << " took the trick" << std::endl;
+    calling_player = taking_player;
+  }
   std::cout << "game done." << std::endl;
 }
 

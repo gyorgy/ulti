@@ -38,4 +38,8 @@ void GameState::SetBidAndTalon(int bidding_player, const Bids& bid, const Cards&
   players_[bidding_player]->RemoveFromHand(talon);
 }
 
+void GameState::SetTrump(Cards::Suit trump) {
+  trump_ = trump;
+}
+
 }  // namespace ulti

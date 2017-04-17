@@ -17,6 +17,9 @@ public:
   virtual void Start();
   virtual bool WouldBid(const GameState& state);
   virtual void GetBidAndTalon(const GameState& state, Bids* bid, Cards* talon);
+  virtual Cards::Suit GetTrump();
+  virtual Cards GetCall(const GameState& state, int calling_player,
+                        const std::vector<Cards>& calls);
 
 private:
   DISALLOW_COPY_AND_ASSIGN(Kubler);
