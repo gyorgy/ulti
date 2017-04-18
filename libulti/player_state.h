@@ -4,7 +4,7 @@
 #define ULTI_LIBULTI_PLAYER_STATE_H
 
 #include <libulti/cards.h>
-#include <libulti/macros.h>
+#include <libulti/common.h>
 
 
 namespace ulti {

@@ -3,10 +3,11 @@
 #ifndef ULTI_TESTBED_TESTBED_H
 #define ULTI_TESTBED_TESTBED_H
 
-#include <libulti/cards.h>
-#include <libulti/macros.h>
-#include <libulti/player.h>
 #include <libulti/bids.h>
+#include <libulti/cards.h>
+#include <libulti/common.h>
+#include <libulti/player.h>
+#include <libulti/rules.h>
 
 namespace ulti {
 namespace testbed {
@@ -22,6 +23,7 @@ private:
   Cards talon_;
   Bids bid_;
   int bidding_player_;
+  Rules rules_;
 
   void StartGame();
   void Deal();

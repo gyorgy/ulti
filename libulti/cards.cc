@@ -9,8 +9,8 @@ namespace ulti {
 
 Cards Cards::GetRandomCard() const {
   std::vector<Cards> cards;
-  for (Card mask = 1UL; mask; mask <<= 1) {
-    if (cards_ & mask) {
+  for (uint32 mask = 1U; mask; mask <<= 1) {
+    if (bits_ & mask) {
       cards.push_back(Cards(mask));
     }
   }
@@ -18,12 +18,12 @@ Cards Cards::GetRandomCard() const {
 }
 
 bool Cards::IsTrumplesTaking(const Cards& other) const {
-  const uint_fast32_t bits = (cards_ & 0x87878787UL) |
-                             ((cards_ & 0x38383838UL) << 1) |
-                             ((cards_ & 0x40404040UL) >> 3);
-  const uint_fast32_t other_bits = (cards_ & 0x87878787UL) |
-                                   ((cards_ & 0x38383838UL) << 1) |
-                                   ((cards_ & 0x40404040UL) >> 3);
+  const uint_fast32_t bits = (bits_ & 0x87878787U) |
+                             ((bits_ & 0x38383838U) << 1) |
+                             ((bits_ & 0x40404040U) >> 3);
+  const uint_fast32_t other_bits = (bits_ & 0x87878787U) |
+                                   ((bits_ & 0x38383838U) << 1) |
+                                   ((bits_ & 0x40404040U) >> 3);
   return other_bits > bits;
 }
 

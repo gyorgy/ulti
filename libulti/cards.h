@@ -3,13 +3,10 @@
 #ifndef ULTI_LIBULTI_CARDS_H
 #define ULTI_LIBULTI_CARDS_H
 
-#include <cstdint>
-
-#include "bits.h"
+#include <libulti/bits.h>
+#include <libulti/common.h>
 
 namespace ulti {
-
-typedef uint_fast32_t Card;
 
 class Cards final {
 public:
@@ -31,22 +28,22 @@ public:
     ACE   = (1UL << 7),
   };
 
-  Cards() : cards_(0UL) {}
-  Cards(Card cards) : cards_(cards) {}
+  Cards() : bits_(0UL) {}
+  Cards(uint32 bits) : bits_(bits) {}
 
-  Cards::Suit GetSuit() const { return static_cast<Suit>(CountTrailingZeros(cards_) / 8 * 8); }
-  int GetRank() const { return cards_ >> GetSuit() & 0xff; }
-  int Count() const { return PopCount(cards_); }
+  Cards::Suit GetSuit() const { return static_cast<Suit>(CountTrailingZeros(bits_) / 8 * 8); }
+  int GetRank() const { return bits_ >> GetSuit() & 0xff; }
+  int Count() const { return PopCount(bits_); }
   Cards GetRandomCard() const;
-  bool IsTaking(const Cards& other) const { return cards_ > other.cards_; }
+  bool IsTaking(const Cards& other) const { return bits_ > other.bits_; }
   bool IsTrumplesTaking(const Cards& other) const;
 
-  void Clear() { cards_ = 0UL; }
-  void Add(const Cards& cards) { cards_ |= cards.cards_; }
-  void Remove(const Cards& cards) { cards_ &= ~cards.cards_; }
+  void Clear() { bits_ = 0UL; }
+  void Add(const Cards& cards) { bits_ |= cards.bits_; }
+  void Remove(const Cards& cards) { bits_ &= ~cards.bits_; }
 
 private:
-  Card cards_;
+  uint32 bits_;
 };
 
 }  // namespace ulti

@@ -9,7 +9,7 @@ set(SOURCE_FILES
         engine.cc
         player.h
         player.cc
-        macros.h
+        common.h
         game_state.h
         game_state.cc
         player_state.h

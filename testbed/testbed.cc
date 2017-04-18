@@ -109,7 +109,11 @@ static std::string CardToString(const Cards& card) {
 }
 
 Testbed::Testbed(Player* player_1, Player* player_2, Player* player_3)
-  : players_{player_1, player_2, player_3} {}
+  : players_{player_1, player_2, player_3},
+    talon_(0),
+    bid_(0),
+    bidding_player_(0),
+    rules_() {}
 
 int Testbed::RunOnce() {
   StartGame();
@@ -177,8 +181,8 @@ void Testbed::RunAuction() {
 
 void Testbed::RunGame() {
   std::cout << "running game..." << std::endl;
-  const Cards::Suit trump = HasTrump(bid_) ?
-                            players_[bidding_player_]->GetTrump() : Cards::TRUMPLESS;
+  const Cards::Suit trump = bid_.IsTrumpless() ?
+                            Cards::TRUMPLESS : players_[bidding_player_]->GetTrump();
   for (auto player : players_) {
     player->StartPlay(bidding_player_, bid_, trump);
   }
@@ -187,6 +191,7 @@ void Testbed::RunGame() {
     std::cout << "trump is " << SuitToString(trump);
   }
   std::cout << std::endl;
+  rules_.SetBid(bid_, trump);
   int calling_player = bidding_player_;
   for (int round = 0; round < 10; ++round) {
     int current_player = calling_player;
@@ -200,7 +205,7 @@ void Testbed::RunGame() {
       std::cout << current_player << " calls " << CardToString(call) << std::endl;
       current_player = (current_player + 1) % 3;
     }
-    const int taking_player = GetTaker(bid_, trump, calling_player, calls);
+    const int taking_player = rules_.GetTaker(calling_player, calls);
     for (auto player : players_) {
       player->NotifyTrick(taking_player, calls);
     }

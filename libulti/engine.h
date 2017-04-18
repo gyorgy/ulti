@@ -5,7 +5,7 @@
 
 #include <vector>
 
-#include <libulti/macros.h>
+#include <libulti/common.h>
 #include <libulti/cards.h>
 
 namespace ulti {

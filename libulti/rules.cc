@@ -6,33 +6,21 @@
 
 namespace ulti {
 
-static bool IsTaking(const Bids& bid, Cards::Suit called_suit, Cards::Suit trump,
-                     const Cards& current_best, const Cards& card) {
-  const Cards::Suit suit = card.GetSuit();
-  if (suit != called_suit && suit != trump) {
-    return false;
-  }
-  const Cards::Suit best_suit = current_best.GetSuit();
-  if (best_suit == trump && suit != trump) {
-    return false;
-  }
-  if (called_suit != trump && suit == trump) {
-    return true;
-  }
-  return HasTrump(bid) ? card.IsTaking(current_best) : card.IsTrumplesTaking(current_best);
+Rules::Rules()
+  : bids_(Bids::PASS),
+    trump_(Cards::Suit::TRUMPLESS) {}
+
+void Rules::SetBid(const Bids& bids, Cards::Suit trump) {
+  bids_ = bids;
+  trump_ = trump;
 }
 
-bool HasTrump(const Bids& bids) {
-  return !bids.IsBetli();
-}
-
-int GetTaker(const Bids& bid, Cards::Suit trump, int calling_player,
-             std::vector<Cards>& calls) {
+int Rules::GetTaker(int calling_player, const std::vector<Cards>& calls) const {
   const Cards::Suit called_suit = calls[0].GetSuit();
   int taker = 0;
   Cards taking_card = calls[0];
   for (int i = 1; i < 3; ++i) {
-    if (IsTaking(bid, called_suit, trump, taking_card, calls[i])) {
+    if (IsTaking(called_suit, taking_card, calls[i])) {
       taker = i;
       taking_card = calls[i];
     }
@@ -40,10 +28,23 @@ int GetTaker(const Bids& bid, Cards::Suit trump, int calling_player,
   return (calling_player + taker) % 3;
 }
 
-Cards GetValidCalls(const Bids& bid, Cards::Suit trump, const Cards& hand,
-                    const std::vector<Cards>& calls) {
-  // TODO(gyorgy): Implement it.
-  return hand;
+Cards Rules::GetValidCalls(const Cards& hand, const std::vector<Cards>& calls) const {
+
+}
+
+bool Rules::IsTaking(Cards::Suit called_suit, const Cards& current_best, const Cards& card) const {
+  const Cards::Suit suit = card.GetSuit();
+  if (suit != called_suit && suit != trump_) {
+    return false;
+  }
+  const Cards::Suit best_suit = current_best.GetSuit();
+  if (best_suit == trump_ && suit != trump_) {
+    return false;
+  }
+  if (called_suit != trump_ && suit == trump_) {
+    return true;
+  }
+  return HasTrump() ? card.IsTaking(current_best) : card.IsTrumplesTaking(current_best);
 }
 
 }  // namespace ulti

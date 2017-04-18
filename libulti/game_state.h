@@ -5,7 +5,7 @@
 
 #include <libulti/bids.h>
 #include <libulti/cards.h>
-#include <libulti/macros.h>
+#include <libulti/common.h>
 #include <libulti/player_state.h>
 
 namespace ulti {

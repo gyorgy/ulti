@@ -5,19 +5,29 @@
 
 #include <vector>
 
+#include <libulti/bids.h>
 #include <libulti/cards.h>
 
 namespace ulti {
 
-class Bids;
+class Rules final {
+public:
+  Rules();
 
-bool HasTrump(const Bids& bids);
+  void SetBid(const Bids& bids, Cards::Suit trump);
 
-int GetTaker(const Bids& bid, Cards::Suit trump, int calling_player,
-                    std::vector<Cards>& calls);
+  bool HasTrump() const { return !bids_.IsTrumpless(); }
+  int GetTaker(int calling_player, const std::vector<Cards>& calls) const;
+  Cards GetValidCalls(const Cards& hand, const std::vector<Cards>& calls) const;
 
-Cards GetValidCalls(const Bids& bid, Cards::Suit trump, const Cards& hand,
-                    const std::vector<Cards>& calls);
+private:
+  Bids bids_;
+  Cards::Suit trump_;
+
+  bool IsTaking(Cards::Suit called_suit, const Cards& current_best, const Cards& card) const;
+
+  DISALLOW_COPY_AND_ASSIGN(Rules);
+};
 
 }  // namespace ulti
 

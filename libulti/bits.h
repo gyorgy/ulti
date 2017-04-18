@@ -3,13 +3,13 @@
 #ifndef ULTI_LIBULTI_BITS_H
 #define ULTI_LIBULTI_BITS_H
 
-#include <cstdint>
+#include <libulti/common.h>
 
 namespace ulti {
 
-inline int PopCount(uint_fast32_t bits) { return __builtin_popcountl(bits); }
+inline int PopCount(uint32 bits) { return __builtin_popcountl(bits); }
 
-inline int CountTrailingZeros(uint_fast32_t bits) { return __builtin_ctzl(bits); }
+inline int CountTrailingZeros(uint32 bits) { return __builtin_ctzl(bits); }
 
 }  // namespace ulti
 

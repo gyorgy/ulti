@@ -7,7 +7,7 @@
 
 #include <libulti/bids.h>
 #include <libulti/cards.h>
-#include <libulti/macros.h>
+#include <libulti/common.h>
 
 namespace ulti {
 
