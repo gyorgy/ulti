@@ -18,14 +18,18 @@ bool Kubler::WouldBid(const GameState& state) {
   return false;
 }
 
-void Kubler::GetBidAndTalon(const GameState& state, Bids* bid, Cards* talon) {
+Bids Kubler::GetBid(const GameState& state) {
   // TODO(gyorgy): Implement it.
-  Cards hand(state.GetHand());
-  Cards new_talon(hand.GetRandomCard());
-  hand.Remove(new_talon);
-  new_talon.Add(hand.GetRandomCard());
-  *bid = Bids(Bids::PARTI);
-  *talon = new_talon;
+  return Bids(Bids::PARTI);
+}
+
+Cards Kubler::GetTalon(const GameState& state) {
+  // TODO(gyorgy): Implement it.
+  Cards hand(state.GetSelfState().GetHand());
+  Cards talon(hand.GetRandomCard());
+  hand.Remove(talon);
+  talon.Add(hand.GetRandomCard());
+  return talon;
 }
 
 Cards::Suit Kubler::GetTrump() {
@@ -35,7 +39,7 @@ Cards::Suit Kubler::GetTrump() {
 
 Cards Kubler::GetCall(const GameState& state, int calling_player, const std::vector<Cards>& calls) {
   // TODO(gyorgy): Implement it.
-  return(state.GetHand().GetRandomCard());
+  return(state.GetSelfState().GetHand().GetRandomCard());
 }
 
 }  // namespace kubler

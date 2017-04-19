@@ -23,17 +23,12 @@ void GameState::Reset(int self_id) {
   }
 }
 
-void GameState::Deal(const Cards& cards) {
-  players_[self_id_]->Deal(cards);
-}
-
-void GameState::RemoveFromHand(const Cards& cards) {
-  players_[self_id_]->RemoveFromHand(cards);
-}
-
-void GameState::SetBidAndTalon(int bidding_player, const Bids& bid, const Cards& talon) {
+void GameState::SetBid(int bidding_player, const Bids& bid) {
   bidding_player_ = bidding_player;
   bid_ = bid;
+}
+
+void GameState::SetTalon(int bidding_player, const Cards& talon) {
   talon_ = talon;
   players_[bidding_player]->RemoveFromHand(talon);
 }

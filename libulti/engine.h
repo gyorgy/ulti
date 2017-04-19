@@ -5,6 +5,7 @@
 
 #include <vector>
 
+#include <libulti/bids.h>
 #include <libulti/common.h>
 #include <libulti/cards.h>
 
@@ -20,10 +21,12 @@ public:
 
   virtual void Start() = 0;
   virtual bool WouldBid(const GameState& state) = 0;
-  virtual void GetBidAndTalon(const GameState& state, Bids* bid, Cards* talon) = 0;
+  virtual Bids GetBid(const GameState& state) = 0;
+  virtual Cards GetTalon(const GameState& state) = 0;
   virtual Cards::Suit GetTrump() = 0;
   virtual Cards GetCall(const GameState& state, int calling_player,
                         const std::vector<Cards>& calls) = 0;
+
 private:
   DISALLOW_COPY_AND_ASSIGN(Engine);
 };

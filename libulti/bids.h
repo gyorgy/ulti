@@ -21,6 +21,8 @@ public:
     HEARTS          = (1U << 7),
     OPEN            = (1U << 8),
     TRUMPLESS       = (1U << 9),
+    KONTRA          = (1U << 10),
+    REKONTRA        = (1U << 11)
   };
 
   Bids() : bits_(PASS) {}
@@ -37,6 +39,8 @@ public:
   bool IsHearts() const { return bits_ & HEARTS; }
   bool IsOpen() const { return bits_ & OPEN; }
   bool IsTrumpless() const { return bits_ & TRUMPLESS; }
+  bool IsKontra() const { return bits_ & KONTRA; }
+  bool IsRekontra() const { return bits_ & REKONTRA; }
 
 private:
   uint32 bits_;

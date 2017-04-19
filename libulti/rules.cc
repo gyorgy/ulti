@@ -29,7 +29,8 @@ int Rules::GetTaker(int calling_player, const std::vector<Cards>& calls) const {
 }
 
 Cards Rules::GetValidCalls(const Cards& hand, const std::vector<Cards>& calls) const {
-
+  // TODO(gyorgy): Implement it.
+  return hand;
 }
 
 bool Rules::IsTaking(Cards::Suit called_suit, const Cards& current_best, const Cards& card) const {

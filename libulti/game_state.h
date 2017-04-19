@@ -16,12 +16,14 @@ public:
   ~GameState();
 
   int GetSelfId() const { return self_id_; }
-  Cards GetHand() const { return players_[self_id_]->GetHand(); }
+  const PlayerState& GetPlayer(int player_id) const { return *players_[player_id]; }
+  PlayerState* GetPlayer(int player_id) { return players_[player_id]; }
+  const PlayerState& GetSelfState() const { return GetPlayer(GetSelfId()); }
+  PlayerState* GetSelfState() { return GetPlayer(GetSelfId()); }
 
   void Reset(int self_id);
-  void Deal(const Cards& cards);
-  void RemoveFromHand(const Cards& cards);
-  void SetBidAndTalon(int bidding_player, const Bids& bid, const Cards& talon);
+  void SetBid(int bidding_player, const Bids& bid);
+  void SetTalon(int bidding_player, const Cards& talon);
   void SetTrump(Cards::Suit trump);
 
 private:

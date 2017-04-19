@@ -22,13 +22,22 @@ public:
   void StartGame(int self_id);
   void Deal(const Cards& cards);
   bool WouldBid();
-  void GetBidAndTalon(Bids* bids, Cards* cards);
+  Bids GetBid();
+  Cards GetTalon();
   void NotifyBid(int bidding_player, const Bids& bid);
   Cards::Suit GetTrump();
   void StartPlay(int bidding_player, const Bids& bid, Cards::Suit trump);
   Cards GetCall(int calling_player, const std::vector<Cards>& calls);
+  int GetNumForties();
+  int GetNumTwenties();
+  void NotifyAnnouncements(int player, int forties, int twenties);
+  int GetKontras(std::vector<Bids>* kontras);
+  void NotifyKontras(int player, const std::vector<Bids>& kontras);
+  int GetRekontras(const std::vector<Bids>& kontras, std::vector<Bids>* rekontras);
+  void NotifyRekontras(int player, const std::vector<Bids>& rekontras);
   void NotifyCall(int current_player, const Cards& call);
   void NotifyTrick(int taking_player, const std::vector<Cards>& calls);
+  void NotifyResult(const std::vector<Bids>& won_bids, const std::vector<Bids>& lost_bids);
 
 private:
   Engine* engine_;

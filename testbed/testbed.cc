@@ -167,7 +167,8 @@ void Testbed::RunAuction() {
         pass_count += 1;
       }
     } else {
-      players_[current_player]->GetBidAndTalon(&bid_, &talon_);
+      bid_ = players_[current_player]->GetBid();
+      talon_ = players_[current_player]->GetTalon();
       bidding_player_ = current_player;
       for (auto player : players_) {
         player->NotifyBid(bidding_player_, bid_);

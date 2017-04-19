@@ -3,8 +3,8 @@
 #ifndef ULTI_LIBKUBLER_KUBLER_H
 #define ULTI_LIBKUBLER_KUBLER_H
 
-#include <libulti/engine.h>
 #include <libulti/common.h>
+#include <libulti/engine.h>
 
 namespace ulti {
 namespace kubler {
@@ -16,7 +16,8 @@ public:
 
   virtual void Start();
   virtual bool WouldBid(const GameState& state);
-  virtual void GetBidAndTalon(const GameState& state, Bids* bid, Cards* talon);
+  virtual Bids GetBid(const GameState& state);
+  virtual Cards GetTalon(const GameState& state);
   virtual Cards::Suit GetTrump();
   virtual Cards GetCall(const GameState& state, int calling_player,
                         const std::vector<Cards>& calls);
