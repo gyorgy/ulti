@@ -20,7 +20,7 @@ int Rules::GetTaker(int calling_player, const std::vector<Cards>& calls) const {
   int taker = 0;
   Cards taking_card = calls[0];
   for (int i = 1; i < 3; ++i) {
-    if (IsTaking(called_suit, taking_card, calls[i])) {
+    if (IsBeating(called_suit, taking_card, calls[i])) {
       taker = i;
       taking_card = calls[i];
     }
@@ -33,7 +33,7 @@ Cards Rules::GetValidCalls(const Cards& hand, const std::vector<Cards>& calls) c
   return hand;
 }
 
-bool Rules::IsTaking(Cards::Suit called_suit, const Cards& current_best, const Cards& card) const {
+bool Rules::IsBeating(Cards::Suit called_suit, const Cards &current_best, const Cards &card) const {
   const Cards::Suit suit = card.GetSuit();
   if (suit != called_suit && suit != trump_) {
     return false;
@@ -42,10 +42,13 @@ bool Rules::IsTaking(Cards::Suit called_suit, const Cards& current_best, const C
   if (best_suit == trump_ && suit != trump_) {
     return false;
   }
-  if (called_suit != trump_ && suit == trump_) {
+  if (called_suit != trump_ && best_suit != trump_ && suit == trump_) {
     return true;
   }
-  return HasTrump() ? card.IsTaking(current_best) : card.IsTrumplesTaking(current_best);
+  if (best_suit == trump_ && suit == trump_) {
+    return card.IsBeating(current_best);
+  }
+  return HasTrump() ? card.IsBeating(current_best) : card.IsBeatingTrumpless(current_best);
 }
 
 }  // namespace ulti

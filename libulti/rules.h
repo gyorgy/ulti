@@ -24,7 +24,7 @@ private:
   Bids bids_;
   Cards::Suit trump_;
 
-  bool IsTaking(Cards::Suit called_suit, const Cards& current_best, const Cards& card) const;
+  bool IsBeating(Cards::Suit called_suit, const Cards &current_best, const Cards &card) const;
 
   DISALLOW_COPY_AND_ASSIGN(Rules);
 };

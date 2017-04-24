@@ -17,7 +17,7 @@ Cards Cards::GetRandomCard() const {
   return cards[rand() % cards.size()];
 }
 
-bool Cards::IsTrumplesTaking(const Cards& other) const {
+bool Cards::IsBeatingTrumpless(const Cards &other) const {
   const uint_fast32_t bits = (bits_ & 0x87878787U) |
                              ((bits_ & 0x38383838U) << 1) |
                              ((bits_ & 0x40404040U) >> 3);

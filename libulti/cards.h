@@ -35,8 +35,8 @@ public:
   int GetRank() const { return bits_ >> GetSuit() & 0xff; }
   int Count() const { return PopCount(bits_); }
   Cards GetRandomCard() const;
-  bool IsTaking(const Cards& other) const { return bits_ > other.bits_; }
-  bool IsTrumplesTaking(const Cards& other) const;
+  bool IsBeating(const Cards &other) const { return bits_ > other.bits_; }
+  bool IsBeatingTrumpless(const Cards &other) const;
 
   void Clear() { bits_ = 0UL; }
   void Add(const Cards& cards) { bits_ |= cards.bits_; }
